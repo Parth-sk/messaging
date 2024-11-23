@@ -1,5 +1,7 @@
 package com.activemq;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
@@ -15,6 +17,15 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 public class HelloWorldJMS {
     public static void main(String[] args) throws JMSException {
         // Create a connection factory
+        try {
+            InetAddress address = InetAddress.getLocalHost();
+            String ipAddress = address.getHostAddress();
+            System.out.println("IP Address: " + ipAddress);
+
+            // Create a connection factory using the IP address
+        } catch (UnknownHostException e) {
+            System.out.println("Unknown host");
+        }
         ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
 
         // Create a connection
